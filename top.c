@@ -184,7 +184,7 @@ static int       Frame_srtflg,          // the subject window's sort direction
          * 2 columns each.
          */
 
-SCB_NUMx(P_PID, XXXID)
+SCB_NUMx(P_TID, XXXID)
 SCB_NUMx(P_PPD, ppid)
 SCB_STRx(P_URR, ruser)
 SCB_NUMx(P_UID, euid)
@@ -1228,7 +1228,7 @@ static FLD_t Fieldstab[] = {
       L_EITHER       - must L_status, else 64-bit math, __udivdi3 on 32-bit !
       keys   head           fmts     width   scale  sort   desc                     lflg
      ------  -----------    -------  ------  -----  -----  ----------------------   -------- */
-   { "AaAa", "   PID",      " %5u",     -1,    -1, SF(PID), "Process Id",           L_NONE   },
+   { "AaAa", "   PID",      " %5u",     -1,    -1, SF(TID), "Process Id",           L_NONE   },
    { "BbBb", "  PPID",      " %5u",     -1,    -1, SF(PPD), "Parent Process Pid",   L_EITHER },
    { "CcQq", " RUSER   ",   " %-8.8s",  -1,    -1, SF(URR), "Real user name",       L_RUSER  },
    { "DdCc", "  UID",       " %4u",     -1,    -1, SF(UID), "User Id",              L_NONE   },
@@ -1522,7 +1522,7 @@ static int rc_read_old (const char *const buf, RCF_t *rc) {
             break;
          case 'A':                      // supposed to be start_time
             c = 0; // for scoreboard
-            rc->win[0].sortindx = P_PID;
+            rc->win[0].sortindx = P_TID;
             break;
          case 'T':
             c = 0; // for scoreboard
@@ -1530,7 +1530,7 @@ static int rc_read_old (const char *const buf, RCF_t *rc) {
             break;
          case 'N':
             c = 0; // for scoreboard
-            rc->win[0].sortindx = P_PID;
+            rc->win[0].sortindx = P_TID;
             break;
 
          default:
@@ -1646,8 +1646,8 @@ static void before (char *me)
       unsigned pid_digits = get_pid_digits();
       if(pid_digits<4) pid_digits=4;
       snprintf(pid_fmt, sizeof pid_fmt, " %%%uu", pid_digits);
-      Fieldstab[P_PID].fmts = pid_fmt;
-      Fieldstab[P_PID].head = "        PID" + 10 - pid_digits;
+      Fieldstab[P_TID].fmts = pid_fmt;
+      Fieldstab[P_TID].head = "        PID" + 10 - pid_digits;
       Fieldstab[P_PPD].fmts = pid_fmt;
       Fieldstab[P_PPD].head = "       PPID" + 10 - pid_digits;
    }
@@ -2839,7 +2839,7 @@ static void do_key (unsigned c)
             const unsigned  xkey;
             const FLG_t     sort;
          } xtab[] = {
-            { "Memory", 'M', P_MEM, }, { "Numerical", 'N', P_PID, },
+            { "Memory", 'M', P_MEM, }, { "Numerical", 'N', P_TID, },
             { "CPU",    'P', P_CPU, }, { "Time",      'T', P_TM2  }, };
          int i;
          for (i = 0; i < MAXTBL(xtab); ++i)
@@ -3114,7 +3114,7 @@ static void task_show (const WIN_t *q, const proc_t *p)
          case P_NCE:
             MKCOL((int)p->nice);
             break;
-         case P_PID:
+         case P_TID:
             MKCOL((unsigned)p->XXXID);
             break;
          case P_PPD:

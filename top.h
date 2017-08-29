@@ -245,7 +245,7 @@ enum scale_num {
 
 // Flags for each possible field
 enum pflag {
-   P_PID, P_PPD, P_URR, P_UID, P_URE, P_GRP, P_TTY,
+   P_TID, P_PPD, P_URR, P_UID, P_URE, P_GRP, P_TTY,
    P_PRI, P_NCE,
    P_CPN, P_CPU, P_TME, P_TM2,
    P_MEM, P_VRT, P_SWP, P_RES, P_COD, P_DAT, P_SHR,
@@ -365,7 +365,7 @@ typedef struct WIN_t {
    { P_CPU, DEF_WINFLGS, 0, \
       COLOR_RED, COLOR_RED, COLOR_YELLOW, COLOR_RED, \
       "Def", DEF_FIELDS }, \
-   { P_PID, DEF_WINFLGS, 0, \
+   { P_TID, DEF_WINFLGS, 0, \
       COLOR_CYAN, COLOR_CYAN, COLOR_WHITE, COLOR_CYAN, \
       "Job", JOB_FIELDS }, \
    { P_MEM, DEF_WINFLGS, 0, \
