@@ -3379,6 +3379,7 @@ int main (int dont_care_argc, char *argv[])
       tv.tv_usec = (Rc.delay_time - (int)Rc.delay_time) * 1000000;
 
       if (Batch) {
+         break;
          select(0, NULL, NULL, NULL, &tv);  // ought to loop until done
       } else {
          long file_flags;
