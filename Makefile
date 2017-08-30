@@ -103,7 +103,7 @@ PKG_CFLAGS   := -fno-common -ffast-math \
 # Note that some stuff below is conditional on CFLAGS containing
 # an option that starts with "-g". (-g, -g2, -g3, -ggdb, etc.)
 CFLAGS       := -O2 -s
-ALL_CFLAGS   := $(PKG_CFLAGS) $(CFLAGS)
+ALL_CFLAGS   := $(PKG_CFLAGS) $(CFLAGS) -pg
 
 PKG_LDFLAGS  := -Wl,-warn-common
 LDFLAGS      :=
